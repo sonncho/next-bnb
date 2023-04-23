@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
 import AirbnbLogoTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from '../styles/palette';
+import useModal from '../hooks/useModal';
+import AuthModal from './auth/AuthModal';
 
 const Container = styled.div`
   position: sticky;
@@ -16,7 +18,7 @@ const Container = styled.div`
   align-items: center;
   padding: 0 80px;
   background-color: white;
-  box-shadow: rgba(0,0,0, 0.08) 0 1px 12px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 12px;
   z-index: 10;
   .header-logo-wrapper {
     display: flex;
@@ -43,33 +45,45 @@ const Container = styled.div`
       height: 42px;
       padding: 0 16px;
       border: 0;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
       border-radius: 21px;
       background-color: white;
       cursor: pointer;
       outline: none;
       &:hover {
-        box-shadow: 0px 2px 8px rgba(0,0,0,0.12);
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
       }
     }
   }
 `;
 
 const Header: React.FC = () => {
+  const { openModalPortal, ModalPortal } = useModal();
   return (
     <Container>
       <Link href="/" className="header-logo-wrapper">
-        <Image className="header-logo" src={AirbnbLogoIcon} width={30} height={32} alt="logo" />
-        <Image src={AirbnbLogoTextIcon} width={68} height={24} alt="logo" />
+        <Image
+          className="header-logo"
+          src={AirbnbLogoIcon}
+          width={30}
+          height={32}
+          alt="logo"
+          priority
+        />
+        <Image src={AirbnbLogoTextIcon} width={68} height={24} alt="logo" priority />
       </Link>
       <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button">
+        <button type="button" className="header-sign-up-button" onClick={openModalPortal}>
           회원가입
         </button>
         <button type="button" className="header-login-button">
           로그인
         </button>
       </div>
+
+      <ModalPortal>
+        <AuthModal />
+      </ModalPortal>
     </Container>
   );
 };
