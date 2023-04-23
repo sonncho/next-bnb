@@ -33,6 +33,16 @@ module.exports = {
     'react/prop-types': 'off', // proptypes를 사용하지 않음.
     'object-curly-newline': 'off', // { 다음 줄 바꿈을 강제로 사용하지 않음
     'react/jsx-one-expression-per-line': 'off', // 한 라인에 여러개의 JSX를 사용할 수 있음.
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: [
+          'function-declaration',
+          'function-expression',
+          'arrow-function',
+        ],
+      },
+    ],
     'implicit-arrow-linebreak': 'off', // 화살표 함수 다음에 줄 바꿈을 사용할 수 있다.
     'no-shadow': 'off', // 파일 내에서 중복 이름을 사용할 수 있다.
     'operator-linebreak': 'off', // 연산자 다음 줄 바꿈을 할 수 있다.
