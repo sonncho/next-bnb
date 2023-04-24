@@ -6,7 +6,7 @@ import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
 import AirbnbLogoTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from '../styles/palette';
 import useModal from '../hooks/useModal';
-import AuthModal from './auth/AuthModal';
+import SignUpModal from './auths/SignUpModal';
 
 const Container = styled.div`
   position: sticky;
@@ -18,13 +18,18 @@ const Container = styled.div`
   align-items: center;
   padding: 0 80px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 12px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
   z-index: 10;
   .header-logo-wrapper {
     display: flex;
     align-items: center;
     .header-logo {
       margin-right: 6px;
+    }
+    h1 {
+      font-size: 21px;
+      font-weight: bold;
+      color: ${palette.main_pink};
     }
   }
   .header-auth-buttons {
@@ -62,15 +67,8 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Link href="/" className="header-logo-wrapper">
-        <Image
-          className="header-logo"
-          src={AirbnbLogoIcon}
-          width={30}
-          height={32}
-          alt="logo"
-          priority
-        />
-        <Image src={AirbnbLogoTextIcon} width={68} height={24} alt="logo" priority />
+        <AirbnbLogoIcon className="header-logo" />
+        <AirbnbLogoTextIcon />
       </Link>
       <div className="header-auth-buttons">
         <button type="button" className="header-sign-up-button" onClick={openModalPortal}>
@@ -82,7 +80,7 @@ const Header: React.FC = () => {
       </div>
 
       <ModalPortal>
-        <AuthModal />
+        <SignUpModal />
       </ModalPortal>
     </Container>
   );
