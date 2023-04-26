@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import CloseXIcon from '../../public/static/svg/auth/modal_close_x_icon.svg';
 import MailIcon from '../../public/static/svg/auth/mail.svg';
 import PersonIcon from '../../public/static/svg/auth/person.svg';
 import OpendEyeIcon from '../../public/static/svg/auth/opened_eye.svg';
-import palette from '../../styles/palette';
+import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
+import Input from '../common/Input';
 
 const ContainerForm = styled.form`
   width: 568px;
@@ -22,46 +23,86 @@ const ContainerForm = styled.form`
   .input-wrapper {
     position: relative;
     margin-bottom: 16px;
-    input {
-      position: relative;
-      width: 100%;
-      height: 46px;
-      padding: 0 44px 0 11px;
-      border: 1px solid ${palette.gray_eb};
-      border-radius: 4px;
-      font-size: 16px;
-      outline: none;
-      ::placeholder {
-        color: ${palette.gray_76};
-      }
-    }
+  }
+
+  .sign-up-password-input-wrapper {
     svg {
-      position: absolute;
-      right: 11px;
-      top: 16px;
+      cursor: pointer;
     }
   }
 `;
 
 const SignUpModal = () => {
+  const [email, setEmail] = useState<string>('');
+  const [lastname, setLastname] = useState<string>('');
+  const [firstname, setFirstname] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [hidePassword, setHidePassword] = useState<boolean>(true);
+
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const onChangeLastname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLastname(e.target.value);
+  };
+  const onChangeFirstname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstname(e.target.value);
+  };
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const toggleHidePassword = () => {
+    setHidePassword(!hidePassword);
+  };
   return (
     <ContainerForm>
       <CloseXIcon className="modal-close-x-icon" />
       <div className="input-wrapper">
-        <input type="email" placeholder="이메일 주소" name="email" />
-        <MailIcon />
+        <Input
+          placeholder="이메일 주소"
+          type="email"
+          icon={<MailIcon />}
+          name="email"
+          onChange={onChangeEmail}
+          value={email}
+        />
       </div>
       <div className="input-wrapper">
-        <input type="text" placeholder="이름(예: 길동)" />
-        <PersonIcon />
+        <Input
+          placeholder="이름(예: 길동)"
+          type="text"
+          icon={<PersonIcon />}
+          name="lastname"
+          onChange={onChangeLastname}
+          value={lastname}
+        />
       </div>
       <div className="input-wrapper">
-        <input type="text" placeholder="성(예: 홍)" />
-        <PersonIcon />
+        <Input
+          placeholder="성(예: 홍)"
+          type="text"
+          icon={<PersonIcon />}
+          name="firstname"
+          onChange={onChangeFirstname}
+          value={firstname}
+        />
       </div>
-      <div className="input-wrapper">
-        <input type="password" placeholder="비밀번호 설정하기" />
-        <OpendEyeIcon />
+      <div className="input-wrapper sign-up-password-input-wrapper">
+        <Input
+          placeholder="비밀번호 설정하기"
+          type={hidePassword ? 'password' : 'text'}
+          icon={
+            hidePassword ? (
+              <ClosedEyeIcon onClick={toggleHidePassword} />
+            ) : (
+              <OpendEyeIcon onClick={toggleHidePassword} />
+            )
+          }
+          name="password"
+          onChange={onChangePassword}
+          value={password}
+        />
       </div>
     </ContainerForm>
   );

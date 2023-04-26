@@ -4,6 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: ['plugin:react/recommended', 'airbnb', 'plugin:prettier/recommended', 'prettier'],
+  globals: {
+    JSX: true,
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -17,14 +20,15 @@ module.exports = {
     quotes: ['error', 'single'], // 싱글 쿼터 사용
     '@typescript-eslint/quotes': ['error', 'single'],
     'no-unused-var': 0, // 사용 안한 변수 경고 중복
-    'spaced-comment': 'off', // 주석을 뒤에 쓰지 말라는 경고
+    'spaced-comment': 0, // 주석을 뒤에 쓰지 말라는 경고,
+    'react/require-default-props': 0,
     '@typescript-eslint/no-unused-vars': 'warn', // 사용안한 변수는 경고
     '@jsx-a11y/control-has-associated-label': 'off', // 상호 작용하는 엘리먼트에 label을 넣는다
     'react/no-array-index-key': 'off', // key값을 index로 사용할 수 있음.
     'comma-danger': 'off', // 마지막에 ,을 넣어주지 않음.
     'arrow-body-style': 'off', // 화살표 함수 안에 return사용
     'react/no-unescaped-entities': 'off', // 문자열내에서 " ' > } 허용
-    'react/prop-types': 'off', // proptypes를 사용하지 않음.
+    'react/prop-types': 0, // proptypes를 사용하지 않음.
     'object-curly-newline': 'off', // { 다음 줄 바꿈을 강제로 사용하지 않음
     'react/jsx-one-expression-per-line': 'off', // 한 라인에 여러개의 JSX를 사용할 수 있음.
     'react/function-component-definition': [
