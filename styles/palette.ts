@@ -11,6 +11,7 @@ export default {
   snow: '#fff8f6',
   gray_48: '#484848',
   gray_71: '#717171',
+  gray_76: '#767676',
   gray_80: '#808080',
   gray_85: '#858585',
   gray_aa: '#aaa',
