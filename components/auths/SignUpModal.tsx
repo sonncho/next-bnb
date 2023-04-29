@@ -10,6 +10,7 @@ import Input from '../common/Input';
 import palette from '../../styles/palette';
 import Selector from '../common/Selector';
 import { dayList, monthList, yearList } from '../../lib/staticData';
+import Button from '../common/Button';
 
 const ContainerForm = styled.form`
   width: 568px;
@@ -69,6 +70,9 @@ const SignUpModal = () => {
   const [firstname, setFirstname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [hidePassword, setHidePassword] = useState<boolean>(true);
+  const [birthYear, setBirthYear] = useState<string | undefined>();
+  const [birthDay, setBirthDay] = useState<string | undefined>();
+  const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -81,6 +85,15 @@ const SignUpModal = () => {
   };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+  const onChangeBirthYear = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBirthYear(e.target.value);
+  };
+  const onChangeBirthDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBirthDay(e.target.value);
+  };
+  const onChangeBirthMonth = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBirthMonth(e.target.value);
   };
 
   const toggleHidePassword = () => {
@@ -144,14 +157,36 @@ const SignUpModal = () => {
 
       <div className="sign-up-birthday-selectors">
         <div className="sign-up-birthday-month-selector">
-          <Selector options={monthList} disabledOptions={['월']} defaultValue="월" />
+          <Selector
+            options={monthList}
+            disabledOptions={['월']}
+            defaultValue="월"
+            value={birthMonth}
+            onChange={onChangeBirthMonth}
+          />
         </div>
         <div className="sign-up-birthday-day-selector">
-          <Selector options={dayList} disabledOptions={['일']} defaultValue="일" />
+          <Selector
+            options={dayList}
+            disabledOptions={['일']}
+            defaultValue="일"
+            value={birthDay}
+            onChange={onChangeBirthDay}
+          />
         </div>
         <div className="sign-up-birthday-year-selector">
-          <Selector options={yearList} disabledOptions={['년']} defaultValue="년" />
+          <Selector
+            options={yearList}
+            disabledOptions={['년']}
+            defaultValue="년"
+            value={birthYear}
+            onChange={onChangeBirthYear}
+          />
         </div>
+      </div>
+
+      <div className="sign-up-submit-button-wrapper">
+        <Button type="submit">가입하기</Button>
       </div>
     </ContainerForm>
   );
