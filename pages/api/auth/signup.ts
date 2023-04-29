@@ -1,5 +1,6 @@
 import { NextApiResponse, NextApiRequest } from 'next';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import Data from '../../../lib/data';
 import { StoredUserType } from '../../../types/user';
 
@@ -7,7 +8,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { body } = req;
     const { email, firstname, lastname, password, birthday } = body;
-    if (!email || !firstname || !lastname || !password || birthday) {
+
+    if (!email || !firstname || !lastname || !password || !birthday) {
       res.statusCode = 400;
       return res.send('필수 데이터가 없습니다.');
     }
@@ -38,6 +40,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     Data.user.write([...users, newUser]);
+
+    const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
+    res.setHeader(
+      'Set-Cookie',
+      `access_token=${token}; Path=/; Expires=${new Date(
+        Date.now() + 60 * 60 * 24 * 1000 * 3 //3일
+      ).toUTCString()}; HttpOnly`
+    );
 
     return res.end();
   }

@@ -11,6 +11,7 @@ import palette from '../../styles/palette';
 import Selector from '../common/Selector';
 import { dayList, monthList, yearList } from '../../lib/staticData';
 import Button from '../common/Button';
+import { singupAPI } from '../../lib/api/auth';
 
 const ContainerForm = styled.form`
   width: 568px;
@@ -99,8 +100,28 @@ const SignUpModal = () => {
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
   };
+
+  const onSubmitSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const signUpBody = {
+        email,
+        lastname,
+        firstname,
+        password,
+        birthday: new Date(
+          `${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`
+        ).toISOString(),
+      };
+      await singupAPI(signUpBody);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <ContainerForm>
+    <ContainerForm onSubmit={onSubmitSignUp}>
       <CloseXIcon className="modal-close-x-icon" />
       <div className="input-wrapper">
         <Input
