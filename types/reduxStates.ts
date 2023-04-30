@@ -4,3 +4,8 @@ import { UserType } from './user';
 export type UserState = UserType & {
   isLogged: boolean;
 };
+
+// 공통 ReduxState
+export type CommonState = {
+  validateMode: boolean;
+};
