@@ -1,19 +1,10 @@
 [
   {
     "id": 1,
-    "email": "test01@test.com",
-    "firstname": "son",
-    "lastname": "chowon",
-    "password": "$2a$08$v71vIk07S8mfST92gvYE2uVdWSBCQy5fXZttrC1y5GnfEY6jyAUQq",
-    "birthday": "1993-01-27T15:00:00.000Z",
-    "profileImage": "/static/image/user/default_user_profile_image.jpg"
-  },
-  {
-    "id": 2,
     "email": "test02@test.com",
     "firstname": "son",
     "lastname": "chowon",
-    "password": "$2a$08$3WSQo.1bV24eWBLR2bk2m.oysZ9CMKtbFuPV6T6jviXYeYzd/mcCW",
+    "password": "$2a$08$Xhw5zP7U0PPVz3eVggz0qu6tEWBvt0m5xPT099K1Pu3OueabB2Pnq",
     "birthday": "1993-01-27T15:00:00.000Z",
     "profileImage": "/static/image/user/default_user_profile_image.jpg"
   }

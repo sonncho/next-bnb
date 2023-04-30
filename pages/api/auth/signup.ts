@@ -39,8 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       profileImage: '/static/image/user/default_user_profile_image.jpg',
     };
 
-    Data.user.write([...users, newUser]);
-
+    // accessToken을 쿠키에 저장.
     const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
     res.setHeader(
       'Set-Cookie',
@@ -49,8 +48,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       ).toUTCString()}; HttpOnly`
     );
 
-    return res.end();
+    Data.user.write([...users, newUser]);
+
+    // user정보에서 password를 제외한 값들을 전달
+    // Pick을 이용해 password type값만 전달받고
+    // partial로 인터페이스의 모든 프로퍼티를 optional하게 변경한다
+    const newUserWithoutPassword: Partial<Pick<StoredUserType, 'password'>> = newUser;
+
+    delete newUserWithoutPassword.password;
+    res.statusCode = 200;
+    return res.send(newUser);
+    // return res.end();
   }
+
   res.statusCode = 405;
   return res.end();
 };
