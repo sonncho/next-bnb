@@ -16,6 +16,7 @@ import { singupAPI } from '../../lib/api/auth';
 import { userActions } from '../../store/user';
 import useValidateMode from '../../hooks/useValidateMode';
 import PasswordWarning from './PasswordWarning';
+import { authAction } from '../../store/auth';
 
 const ContainerForm = styled.form`
   width: 568px;
@@ -66,6 +67,11 @@ const ContainerForm = styled.form`
     .sign-up-birthday-year-selector {
       width: 33.33333%;
     }
+  }
+  .sign-up-submit-button-wrapper {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid ${palette.gray_eb};
   }
   .sign-up-modal-set-login {
     color: ${palette.dark_cyan};
@@ -140,6 +146,10 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       password.includes(email.split('@')[0]),
     [password, lastname, email]
   );
+
+  const changeToLoginModal = () => {
+    dispatch(authAction.setAuthMode('login'));
+  };
 
   //* 비밀번호가 최소자리 숫자인지
   const isPasswordOverMinLength = useMemo(
@@ -319,7 +329,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
       <p>
         이미 에어비앤비 계정이 있나요?
-        <span className="sign-up-modal-set-login" role="presentation" onClick={() => {}}>
+        <span className="sign-up-modal-set-login" role="presentation" onClick={changeToLoginModal}>
           로그인
         </span>
       </p>

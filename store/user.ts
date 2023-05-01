@@ -18,7 +18,6 @@ const user = createSlice({
   initialState,
   reducers: {
     setLoggedUser(state, action: PayloadAction<UserType>) {
-      // eslint-disable-next-line no-param-reassign
       state = { ...action.payload, isLogged: true };
       return state;
     },

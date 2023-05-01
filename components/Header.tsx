@@ -1,11 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
 import AirbnbLogoTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from '../styles/palette';
 import useModal from '../hooks/useModal';
-import SignUpModal from './auths/SignUpModal';
+import { useSelector } from '../store';
+import HamburgerIcon from '../public/static/svg/header/hamburger.svg';
+import { authAction } from '../store/auth';
+import AuthModal from './auths/AuthModal';
 
 const Container = styled.div`
   position: sticky;
@@ -59,27 +63,75 @@ const Container = styled.div`
       }
     }
   }
+  .header-user-profile {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 6px 0 16px;
+    border: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+    border-radius: 21px;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    .header-user-profile-image {
+      margin-left: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+  }
 `;
 
 const Header: React.FC = () => {
-  const { openModalPortal, ModalPortal } = useModal();
+  const { openModalPortal, ModalPortal, closeModalPortal } = useModal();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  console.log(user);
+
   return (
     <Container>
       <Link href="/" className="header-logo-wrapper">
         <AirbnbLogoIcon className="header-logo" />
         <AirbnbLogoTextIcon />
       </Link>
-      <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button" onClick={openModalPortal}>
-          회원가입
+      {!user.isLogged && ( // 로그인이 아닌경우
+        <div className="header-auth-buttons">
+          <button
+            type="button"
+            className="header-sign-up-button"
+            onClick={() => {
+              dispatch(authAction.setAuthMode('signup'));
+              openModalPortal();
+            }}
+          >
+            회원가입
+          </button>
+          <button
+            type="button"
+            className="header-login-button"
+            onClick={() => {
+              dispatch(authAction.setAuthMode('login'));
+              openModalPortal();
+            }}
+          >
+            로그인
+          </button>
+        </div>
+      )}
+      {user.isLogged && ( // 로그인을 한경우
+        <button className="header-user-profile" type="button">
+          <HamburgerIcon />
+          <img src={user.profileImage} className="header-user-profile-image" alt="" />
         </button>
-        <button type="button" className="header-login-button">
-          로그인
-        </button>
-      </div>
+      )}
 
       <ModalPortal>
-        <SignUpModal />
+        <AuthModal closeModal={closeModalPortal} />
       </ModalPortal>
     </Container>
   );

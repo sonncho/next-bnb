@@ -7,5 +7,14 @@
     "password": "$2a$08$Xhw5zP7U0PPVz3eVggz0qu6tEWBvt0m5xPT099K1Pu3OueabB2Pnq",
     "birthday": "1993-01-27T15:00:00.000Z",
     "profileImage": "/static/image/user/default_user_profile_image.jpg"
+  },
+  {
+    "id": 2,
+    "email": "test01@test.com",
+    "firstname": "son",
+    "lastname": "chowon",
+    "password": "$2a$08$DRPrgOGv0yeCrQ11KZ83ieuuo0Hwtigu4Q3vcUiAZBlFoIrOgZPWO",
+    "birthday": "1993-01-27T15:00:00.000Z",
+    "profileImage": "/static/image/user/default_user_profile_image.jpg"
   }
 ]
