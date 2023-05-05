@@ -122,7 +122,6 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
           }
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onFocus={togglePasswordHiding}
           isValid={password !== ''}
           errorMessage="비밀번호가 필요합니다."
         />
