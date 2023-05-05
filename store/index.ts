@@ -35,7 +35,7 @@ export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelctor;
 const initStore: MakeStore<any> = () => {
   const store = configureStore({
     reducer,
-    devTools: true,
+    // devTools: process.env.NODE_ENV !== 'production',
   });
   initialRootState = store.getState();
   return store;
