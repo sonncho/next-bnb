@@ -33,7 +33,8 @@ const Container = styled.div<InputContainerProps>`
   svg {
     position: absolute;
     right: 11px;
-    height: 46px;
+    transform: translate(0, -50%);
+    top: 50%;
   }
   .input-error-message {
     margin-top: 8px;
@@ -64,6 +65,7 @@ const Container = styled.div<InputContainerProps>`
 `;
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: String;
   icon?: JSX.Element;
   isValid?: boolean;
   useValidation?: boolean;
@@ -71,6 +73,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<IProps> = ({
+  label,
   icon,
   isValid = false,
   useValidation = true,
@@ -80,6 +83,8 @@ const Input: React.FC<IProps> = ({
   const validateMode = useSelector((state: any) => state.common.validateMode);
   return (
     <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      {label && <label>{label}</label>}
       <input {...props} />
       {icon}
       {useValidation && validateMode && !isValid && errorMessage && (
