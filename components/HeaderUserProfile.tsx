@@ -60,7 +60,7 @@ const UserMenuList = styled.ul`
 
 const HeaderUserProfile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const userProfileImage = useSelector((state) => state.user.profileImage);
   const [isUserMenuOpend, setIsUserMenuOpend] = useState<boolean>(false);
   const logout = async () => {
     try {
@@ -80,7 +80,7 @@ const HeaderUserProfile = () => {
     >
       <UserProfileBtn type="button" onClick={() => setIsUserMenuOpend(!isUserMenuOpend)}>
         <HamburgerIcon />
-        <img src={user.profileImage} className="header-user-profile-image" alt="" />
+        <img src={userProfileImage} className="header-user-profile-image" alt="" />
       </UserProfileBtn>
       {isUserMenuOpend && (
         <UserMenuList>

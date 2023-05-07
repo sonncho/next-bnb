@@ -86,6 +86,10 @@ interface IProps {
   closeModal: () => void;
 }
 
+const disabledMonths = ['월'];
+const disabledDays = ['일'];
+const disabledYears = ['년'];
+
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
   const [email, setEmail] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
@@ -294,7 +298,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-birthday-month-selector">
           <Selector
             options={monthList}
-            disabledOptions={['월']}
+            disabledOptions={disabledMonths}
             defaultValue="월"
             value={birthMonth}
             onChange={onChangeBirthMonth}
@@ -304,7 +308,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-birthday-day-selector">
           <Selector
             options={dayList}
-            disabledOptions={['일']}
+            disabledOptions={disabledDays}
             defaultValue="일"
             value={birthDay}
             onChange={onChangeBirthDay}
@@ -314,7 +318,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-birthday-year-selector">
           <Selector
             options={yearList}
-            disabledOptions={['년']}
+            disabledOptions={disabledYears}
             defaultValue="년"
             value={birthYear}
             onChange={onChangeBirthYear}

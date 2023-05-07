@@ -41,15 +41,16 @@ const Container = styled.div`
 `;
 
 const Header: React.FC = () => {
-  const user = useSelector((state) => state.user);
+  const isLogged = useSelector((state) => state.user.isLogged);
   return (
     <Container>
       <Link href="/" className="header-logo-wrapper">
         <AirbnbLogoIcon className="header-logo" />
         <AirbnbLogoTextIcon />
       </Link>
-      {!user.isLogged && <HeaderAuths />}
-      {user.isLogged && <HeaderUserProfile />}
+
+      {!isLogged && <HeaderAuths />}
+      {isLogged && <HeaderUserProfile />}
     </Container>
   );
 };
