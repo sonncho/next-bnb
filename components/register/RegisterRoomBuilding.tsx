@@ -7,6 +7,7 @@ import { largeBuildingTypeList } from '../../lib/staticData';
 import { registerRoomActions } from '../../store/registerRoom';
 import { useSelector } from '../../store';
 import RadioGroup from '../common/RadioGroup';
+import RegisterRoomFooter from './RegisterRoomFooter';
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -128,6 +129,13 @@ const RegisterRoomBuilding = () => {
     dispatch(registerRoomActions.setIsSetUpForGuest(selected));
   };
 
+  const isValid = useMemo(() => {
+    if (!largeBuildingType || !buildingType || !roomType || !isSetUpForGuest === null) {
+      return false;
+    }
+    return true;
+  }, [largeBuildingType, buildingType, roomType, isSetUpForGuest]);
+
   return (
     <Container>
       <h2>등록하실 숙소 종류는 무엇인가요?</h2>
@@ -139,6 +147,7 @@ const RegisterRoomBuilding = () => {
           defaultValue="하나를 선택해주세요."
           disabledOptions={disabledLargeBuildingTypeOptions}
           label="우선 범위를 좁혀볼까요?"
+          isValid={!!largeBuildingType}
           options={largeBuildingTypeList}
           onChange={onChangeLargeBuildingType}
         />
@@ -150,6 +159,7 @@ const RegisterRoomBuilding = () => {
           disabled={!largeBuildingType}
           label="건물 유형을 선택하세요."
           options={detailBuildingOptions}
+          isValid={!!buildingType}
           onChange={onChangeBuildingType}
         />
       </div>
@@ -157,6 +167,7 @@ const RegisterRoomBuilding = () => {
         <>
           <div className="register-room-type-radio">
             <RadioGroup
+              isValid={!!roomType}
               label="게스트가 묵게 될 숙소 유형을 골라주세요."
               value={roomType}
               options={roomTypeRadioOptions}
@@ -165,6 +176,7 @@ const RegisterRoomBuilding = () => {
           </div>
           <div className="register-room-setup-for-guset-radio">
             <RadioGroup
+              isValid={isSetUpForGuest !== null}
               label="게스트만 사용하도록 만들어진 숙소인가요?"
               value={isSetUpForGuest}
               onChange={onChangeIsSetUpForGuest}
@@ -173,6 +185,7 @@ const RegisterRoomBuilding = () => {
           </div>
         </>
       )}
+      <RegisterRoomFooter isValid={isValid} prevHref="/" nextHref="/room/register/bedrooms" />
     </Container>
   );
 };
