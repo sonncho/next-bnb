@@ -132,8 +132,8 @@ const RegisterRoomBedrooms = () => {
         수 있습니다.
       </p>
       <ul className="register-room-bed-type-list-wrapper">
-        {bedList.map((bedroom) => (
-          <RegisterRoomBedTypes bedroom={bedroom} />
+        {bedList.map((bedroom, idx) => (
+          <RegisterRoomBedTypes key={`bedroom_${idx}`} bedroom={bedroom} />
         ))}
       </ul>
     </Container>
