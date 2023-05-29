@@ -41,7 +41,7 @@ const RegisterButtonStyle = css`
   background-color: white;
   border-radius: 4px;
   color: ${palette.gray_48};
-  font-size: 8px;
+  font-size: 18px;
   font-weight: 700;
   outline: none;
   cursor: pointer;
