@@ -13,6 +13,10 @@ const Container = styled.div<InputContainerProps>`
   label {
     display: block;
     margin-bottom: 8px;
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
   }
   input {
     position: relative;
@@ -84,8 +88,15 @@ const Input: React.FC<IProps> = ({
   return (
     <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      {label && <label>{label}</label>}
-      <input {...props} />
+      {label && (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+        <label>
+          <span>{label}</span>
+          <input {...props} />
+        </label>
+      )}
+      {!label && <input {...props} />}
+
       {icon}
       {useValidation && validateMode && !isValid && errorMessage && (
         <p className="input-error-message">{errorMessage}</p>

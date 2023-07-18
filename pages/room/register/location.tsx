@@ -1,8 +1,14 @@
 import React from 'react';
-import RegisterLocation from '../../../components/register/RegisterLocation';
+import RegisterRoomLocation from '../../../components/register/RegisterRoomLocation';
+import RegisterRoomFooter from '../../../components/register/RegisterRoomFooter';
 
 const Location = () => {
-  return <RegisterLocation />;
+  return (
+    <>
+      <RegisterRoomLocation />
+      <RegisterRoomFooter prevHref="/room/register/bathroom" nextHref="/room/register/geometry" />
+    </>
+  );
 };
 
 export default Location;
