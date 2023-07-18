@@ -20,6 +20,7 @@ module.exports = {
     quotes: ['error', 'single'], // 싱글 쿼터 사용
     '@typescript-eslint/quotes': ['error', 'single'],
     'no-unused-var': 0, // 사용 안한 변수 경고 중복
+    'no-console': 0,
     'spaced-comment': 0, // 주석을 뒤에 쓰지 말라는 경고,
     'react/require-default-props': 0,
     '@typescript-eslint/no-unused-vars': 'warn', // 사용안한 변수는 경고
