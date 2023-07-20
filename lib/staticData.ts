@@ -390,3 +390,6 @@ export const amentityList = [
   '옷장/서랍장',
   '게스트 전용 출입문',
 ];
+
+//* 편의공간
+export const convinienceList = ['주방', '세탁공간 - 세탁기', '주차', '헬스장', '수영장', '자쿠지'];
