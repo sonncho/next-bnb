@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import palette from '../../styles/palette';
 import { useSelector } from '../../store';
+import { registerRoomActions } from '../../store/registerRoom';
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -35,6 +37,8 @@ const RegisterRoomGeometry = () => {
   const latitude = useSelector((state) => state.registerRoom.latitude);
   const longitude = useSelector((state) => state.registerRoom.longitude);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const mapScript = document.createElement('script');
 
@@ -61,8 +65,20 @@ const RegisterRoomGeometry = () => {
           position: markerPosition,
         });
         marker.setMap(map);
+
+        // marker click event
+        window.kakao.maps.event.addListener(map, 'click', (mouseEvent: any) => {
+          const centerLat = mouseEvent.latLng.Ma;
+          const centerLong = mouseEvent.latLng.La;
+
+          marker.setPosition(mouseEvent.latLng);
+
+          dispatch(registerRoomActions.setLatitude(centerLat));
+          dispatch(registerRoomActions.setLongitude(centerLong));
+        });
       });
     };
+
     mapScript.addEventListener('load', onLoadKakaoMap);
 
     // 마운트가 끝나면 onLoadKakaoMap 제거
