@@ -1,12 +1,17 @@
 import dynamic from 'next/dynamic';
-// import RegisterRoomGeometry from '../../../components/register/RegisterRoomGeometry';
+import RegisterRoomFooter from '../../../components/register/RegisterRoomFooter';
 
 const RegisterRoomGeometry = dynamic(import('../../../components/register/RegisterRoomGeometry'), {
   ssr: true,
 });
 
 const geometry = () => {
-  return <RegisterRoomGeometry />;
+  return (
+    <>
+      <RegisterRoomGeometry />
+      <RegisterRoomFooter prevHref="/room/register/location" nextHref="/room/register/amentities" />
+    </>
+  );
 };
 
 export default geometry;

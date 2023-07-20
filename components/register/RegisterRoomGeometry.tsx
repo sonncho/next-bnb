@@ -15,8 +15,14 @@ const Container = styled.div`
     color: ${palette.gray_76};
     margin-bottom: 6px;
   }
-  .register-room-geometry-map-wrapper #map {
-    aspect-ratio: 16/9;
+  .register-room-geometry-map-wrapper {
+    width: 487px;
+    height: 280px;
+    margin-top: 24px;
+    > div {
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 declare global {
@@ -33,19 +39,24 @@ const RegisterRoomGeometry = () => {
     const mapScript = document.createElement('script');
 
     mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}`;
+    // autoload=false : 스크립트가 전부 로드될떄까지 대기
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&autoload=false`;
 
     document.head.appendChild(mapScript);
 
     const onLoadKakaoMap = () => {
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
+        const latLang = new window.kakao.maps.LatLng(
+          latitude || 37.56666784,
+          longitude || 126.9778436
+        );
         const options = {
-          center: new window.kakao.maps.LatLng(latitude, longitude),
+          center: latLang,
         };
         const map = new window.kakao.maps.Map(container, options);
 
-        const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+        const markerPosition = latLang;
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
         });
@@ -54,7 +65,8 @@ const RegisterRoomGeometry = () => {
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
 
-    return () => mapScript.removeEventListener('load', onLoadKakaoMap);
+    // 마운트가 끝나면 onLoadKakaoMap 제거
+    // return () => mapScript.removeEventListener('load', onLoadKakaoMap);
   }, []);
 
   return (
