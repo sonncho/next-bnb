@@ -6,7 +6,6 @@ import CheckboxGroup from '../common/CheckboxGroup';
 import { amentityList } from '../../lib/staticData';
 import { useSelector } from '../../store';
 import { registerRoomActions } from '../../store/registerRoom';
-import RegisterRoomFooter from './RegisterRoomFooter';
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -46,11 +45,6 @@ const RegisterRoomAmentities = () => {
       <div className="regsiter-room-amentities-checkbox-group-wrapper">
         <CheckboxGroup value={amentities} onChange={onChangeAmentities} options={amentityList} />
       </div>
-
-      <RegisterRoomFooter
-        prevHref="/room/register/location"
-        nextHref="/room/register/conveniences"
-      />
     </Container>
   );
 };
