@@ -23,6 +23,7 @@ type RegisterRoomState = {
   longitude: number;
   amentities: string[];
   conveniences: string[];
+  photos: string[];
 };
 
 //* 초기상태
@@ -48,6 +49,7 @@ const initialState: RegisterRoomState = {
   longitude: 0, //-경도
   amentities: [], //-편의시설
   conveniences: [], //-편의공간
+  photos: [], //- 숙소사진
 };
 
 const registerRoom = createSlice({
@@ -201,6 +203,10 @@ const registerRoom = createSlice({
     //* 편의공간 변경하기
     setConveniences(state, action: PayloadAction<string[]>) {
       state.conveniences = action.payload;
+    },
+    //* 숙소사진 반경하기
+    setPhotos(state, action: PayloadAction<string[]>) {
+      state.photos = action.payload;
     },
   },
 });
